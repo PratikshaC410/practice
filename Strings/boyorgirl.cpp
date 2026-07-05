@@ -5,7 +5,6 @@ int main()
 {
     set<char> res;
     string s;
-    cout << "Enter the string" << endl;
     cin >> s;
     for (char ch : s)
     {
