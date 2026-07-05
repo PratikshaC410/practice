@@ -1,22 +1,27 @@
 #include <iostream>
-using namespace std;
 #include <set>
+using namespace std;
+
 int main()
 {
-    set<char> res;
     string s;
     cin >> s;
+
+    set<char> res;
+
     for (char ch : s)
     {
         res.insert(ch);
     }
-    int n = res.size();
-    if (n % 2 != 0)
-    {
-        cout << "IGNORE HIM!" << endl;
-    }
-    else
+
+    if (res.size() % 2 == 0)
     {
         cout << "CHAT WITH HER!" << endl;
     }
+    else
+    {
+        cout << "IGNORE HIM!" << endl;
+    }
+
+    return 0;
 }
