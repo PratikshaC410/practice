@@ -1,4 +1,5 @@
-class Solution
+#include <iostream>
+< include<vector> class Solution
 {
 public:
     void dfs(vector<vector<int>> &image, int r, int c,
