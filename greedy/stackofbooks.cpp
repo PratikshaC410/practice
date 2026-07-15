@@ -15,11 +15,9 @@ void solve()
 
     long long extra = 0;
     bool possible = true;
-
-    for (int i = 1; i <= n - 1; i++)
+    for (int i = 1; i <= n; i++)
     {
         long long total_available = a[i] + extra;
-
         if (total_available < i)
         {
             possible = false;
