@@ -1,26 +1,35 @@
+#include <iostream>
 class Solution
 {
 public:
     int minimumSum(vector<int> &nums)
     {
         int n = nums.size();
-        int min_sum = INT_MAX;
 
-        for (int p = 0; p < n; p++)
+        vector<int> left(n), right(n);
+
+        left[0] = INT_MAX;
+        for (int i = 1; i < n; i++)
         {
-            for (int q = p + 1; q < n; q++)
+            left[i] = min(left[i - 1], nums[i - 1]);
+        }
+
+        right[n - 1] = INT_MAX;
+        for (int i = n - 2; i >= 0; i--)
+        {
+            right[i] = min(right[i + 1], nums[i + 1]);
+        }
+
+        int ans = INT_MAX;
+
+        for (int j = 1; j < n - 1; j++)
+        {
+            if (left[j] < nums[j] && right[j] < nums[j])
             {
-                for (int r = q + 1; r < n; r++)
-                {
-                    if (nums[p] < nums[q] && nums[r] < nums[q])
-                    {
-                        min_sum = min(min_sum,
-                                      nums[p] + nums[q] + nums[r]);
-                    }
-                }
+                ans = min(ans, left[j] + nums[j] + right[j]);
             }
         }
 
-        return min_sum == INT_MAX ? -1 : min_sum;
+        return ans == INT_MAX ? -1 : ans;
     }
 };
