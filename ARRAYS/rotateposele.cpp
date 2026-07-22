@@ -17,19 +17,15 @@ public:
 
         k %= m;
 
-        vector<int> rotated;
-        for (int i = 0; i < m; i++)
-        {
-            rotated.push_back(pos[(i + k) % m]);
-        }
+        reverse(pos.begin(), pos.begin() + k);
+        reverse(pos.begin() + k, pos.end());
+        reverse(pos.begin(), pos.end());
 
         int j = 0;
         for (int i = 0; i < nums.size(); i++)
         {
             if (nums[i] >= 0)
-            {
-                nums[i] = rotated[j++];
-            }
+                nums[i] = pos[j++];
         }
 
         return nums;
