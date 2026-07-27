@@ -25,41 +25,56 @@ int minOpsToForm2026(const string &s)
     }
     return min_ops;
 }
-int remove2025(string &s, int idx)
+
+int remove2025_DP(const string &s)
 {
     int n = s.length();
+    const int INF = 1e9;
 
-    int found_idx = -1;
-    for (int i = idx; i <= n - 4; ++i)
+    vector<int> dp(4, INF);
+    dp[0] = 0;
+
+    string target = "2025";
+    char alphabet[] = {'0', '2', '5', '6'};
+
+    for (int i = 0; i < n; ++i)
     {
-        if (s.substr(i, 4) == "2025")
+        vector<int> next_dp(4, INF);
+        for (int j = 0; j < 4; ++j)
         {
-            found_idx = i;
-            break;
-        }
-    }
+            if (dp[j] == INF)
+                continue;
 
-    if (found_idx == -1)
-        return 0;
-
-    int min_ops = 4;
-    const char valid_chars[] = {'0', '2', '5', '6'};
-
-    for (int pos = found_idx; pos < found_idx + 4; ++pos)
-    {
-        char original = s[pos];
-        for (char c : valid_chars)
-        {
-            if (c != original)
+            for (char c : alphabet)
             {
-                s[pos] = c;
-                min_ops = min(min_ops, 1 + remove2025(s, found_idx));
-                s[pos] = original; // backtrack
+                int cost = (s[i] == c) ? 0 : 1;
+
+                string cur = target.substr(0, j) + c;
+                int next_j = 0;
+                for (int k = min(4, (int)cur.length()); k >= 1; --k)
+                {
+                    if (cur.substr(cur.length() - k) == target.substr(0, k))
+                    {
+                        next_j = k;
+                        break;
+                    }
+                }
+
+                if (next_j < 4)
+                {
+                    next_dp[next_j] = min(next_dp[next_j], dp[j] + cost);
+                }
             }
         }
+        dp = next_dp;
     }
 
-    return min_ops;
+    int res = INF;
+    for (int j = 0; j < 4; ++j)
+    {
+        res = min(res, dp[j]);
+    }
+    return res;
 }
 
 void solve()
@@ -70,8 +85,7 @@ void solve()
     cin >> s;
 
     int cost1 = minOpsToForm2026(s);
-    string s_copy = s;
-    int cost2 = remove2025(s_copy, 0);
+    int cost2 = remove2025_DP(s);
 
     cout << min(cost1, cost2) << "\n";
 }
