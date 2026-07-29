@@ -1,14 +1,24 @@
 #include <iostream>
 #include <vector>
-#include <numeric>
 
 using namespace std;
+
+long long gcd(long long a, long long b)
+{
+    while (b != 0)
+    {
+        long long temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
 
 long long lcm(long long a, long long b)
 {
     if (a == 0 || b == 0)
         return 0;
-    return (a / std::gcd(a, b)) * b;
+    return (a / gcd(a, b)) * b;
 }
 
 void solve()
@@ -35,13 +45,13 @@ void solve()
 
         if (i > 0)
         {
-            long long g_left = std::gcd(a[i - 1], a[i]);
+            long long g_left = gcd(a[i - 1], a[i]);
             req_lcm = lcm(req_lcm, g_left);
         }
 
         if (i < n - 1)
         {
-            long long g_right = std::gcd(a[i], a[i + 1]);
+            long long g_right = gcd(a[i], a[i + 1]);
             req_lcm = lcm(req_lcm, g_right);
         }
 
