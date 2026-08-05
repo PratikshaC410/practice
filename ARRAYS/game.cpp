@@ -6,7 +6,7 @@ void solve()
 {
     int n;
     cin >> n;
-    cout << 2 * n - 1 << "\n";
+    cout << 2 * n - 2 << "\n";
 }
 
 int main()
