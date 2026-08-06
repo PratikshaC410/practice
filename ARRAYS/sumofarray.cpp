@@ -1,9 +1,6 @@
 #include <iostream>
 #include <vector>
-
-using namespace std;
-
-void solve()
+using namespace std void solve()
 {
     int n;
     cin >> n;
@@ -14,25 +11,40 @@ void solve()
         return;
     }
 
+    if (n == 2)
+    {
+        cout << -1 << "\n";
+        return;
+    }
+
     vector<long long> a(n);
-    long long sum = 0;
+    a[0] = 1;
+    a[1] = 2;
+    a[2] = 3;
 
-    for (int i = 1; i < n; i++)
+    long long current = 3;
+    for (int i = 3; i < n; ++i)
     {
-        a[i - 1] = i;
-        sum += i;
-    }
-    a[n - 1] = sum;
-    for (int i = 1; i <= n; i++)
-    {
-        a[i - 1] = 1LL * i * (i == n ? (1LL * n * (n - 1) / 2) : 1);
+        current *= 2;
+        a[i] = current;
     }
 
-    long long multiplier = 1;
-    for (int i = 1; i < n; i++)
-        multiplier *= i;
-    long long S = 1;
-    for (int i = 1; i <= n; i++)
+    for (int i = 0; i < n; ++i)
     {
+        cout << a[i] << (i == n - 1 ? "" : " ");
     }
+    cout << "\n";
+}
+
+int main()
+{
+
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        solve();
+    }
+
+    return 0;
 }
