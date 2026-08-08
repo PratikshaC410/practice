@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 
 using namespace std;
 
@@ -11,12 +10,15 @@ void solve()
     long long total_x = 0;
     long long total_y = 0;
 
-    for (int i = 0; i < n; i++)
+    for (int i = 1; i <= n; i++)
     {
         long long x, y;
         cin >> x >> y;
-        total_x += x;
-        total_y += y;
+        if (i > 1)
+        {
+            total_x += x;
+            total_y += y;
+        }
     }
 
     long long perimeter = 4LL * m + 2LL * (total_x + total_y);
