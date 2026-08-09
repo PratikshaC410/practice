@@ -1,7 +1,5 @@
 #include <iostream>
 #include <string>
-#include <vector>
-#include <algorithm>
 
 using namespace std;
 
@@ -17,25 +15,26 @@ void solve()
         cout << -1 << "\n";
         return;
     }
-    vector<int> prefL(n + 1, 0), prefR(n + 1, 0);
-    for (int i = 0; i < n; ++i)
+
+    int flips = 0;
+
+    for (int i = 0; i < k; ++i)
     {
-        prefL[i + 1] = prefL[i] + (s[i] == 'L');
-        prefR[i + 1] = prefR[i] + (s[i] == 'R');
+        if (s[i] == 'L')
+        {
+            flips++;
+        }
     }
 
-    int min_flips = n + 1;
-
-    for (int p = k; p <= n - k; ++p)
+    for (int i = n - k; i < n; ++i)
     {
-        int left_flips = prefL[p];
-
-        int right_flips = prefR[n] - prefR[p];
-
-        min_flips = min(min_flips, left_flips + right_flips);
+        if (s[i] == 'R')
+        {
+            flips++;
+        }
     }
 
-    cout << min_flips << "\n";
+    cout << flips << "\n";
 }
 
 int main()
