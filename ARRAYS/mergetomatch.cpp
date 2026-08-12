@@ -24,17 +24,28 @@ void solve()
     sort(a.begin(), a.end());
     sort(b.begin(), b.end());
 
-    bool possible = true;
+    if (a[0] >= b[0] || a[n - 1] <= b[m - 1])
+    {
+        cout << "NO\n";
+        return;
+    }
+
+    int ptr = 0;
+    bool ok = true;
     for (int i = 0; i < m; ++i)
     {
-        if (b[i] <= a[i] || b[i] >= a[n - m + i])
+        while (ptr < n && a[ptr] < b[i])
         {
-            possible = false;
+            ptr++;
+        }
+        if (ptr == 0 || ptr == n)
+        {
+            ok = false;
             break;
         }
     }
 
-    if (possible)
+    if (ok)
     {
         cout << "YES\n";
     }
@@ -48,10 +59,12 @@ int main()
 {
 
     int t;
-    cin >> t;
-    while (t--)
+    if (cin >> t)
     {
-        solve();
+        while (t--)
+        {
+            solve();
+        }
     }
 
     return 0;
