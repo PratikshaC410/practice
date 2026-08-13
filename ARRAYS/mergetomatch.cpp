@@ -1,78 +1,68 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
+#include <bits/stdc++.h>
 using namespace std;
-
-void solve()
-{
-    int n, m;
-    cin >> n >> m;
-
-    vector<long long> a(n), b(m);
-    for (int i = 0; i < n; ++i)
-        cin >> a[i];
-    for (int i = 0; i < m; ++i)
-        cin >> b[i];
-
-    if (n < m)
-    {
-        cout << "NO\n";
-        return;
-    }
-
-    sort(a.begin(), a.end());
-    sort(b.begin(), b.end());
-
-    if (a[0] >= b[0] || a[n - 1] <= b[m - 1])
-    {
-        cout << "NO\n";
-        return;
-    }
-
-    int ptr = 0;
-    bool possible = true;
-
-    for (int i = 0; i < m; ++i)
-    {
-        if (ptr >= n || a[ptr] >= b[i])
-        {
-            possible = false;
-            break;
-        }
-
-        while (ptr < n && a[ptr] < b[i])
-        {
-            ptr++;
-        }
-
-        if (ptr >= n)
-        {
-            possible = false;
-            break;
-        }
-    }
-
-    if (possible)
-    {
-        cout << "YES\n";
-    }
-    else
-    {
-        cout << "NO\n";
-    }
-}
 
 int main()
 {
 
-    int t;
-    if (cin >> t)
+    int T;
+    cin >> T;
+
+    while (T--)
     {
-        while (t--)
+        int n, m;
+        cin >> n >> m;
+
+        vector<long long> a(n), b(m);
+
+        for (int i = 0; i < n; i++)
+            cin >> a[i];
+        for (int i = 0; i < m; i++)
+            cin >> b[i];
+
+        if (n < 2 * m)
         {
-            solve();
+            cout << "NO\n";
+            continue;
         }
+
+        vector<pair<long long, int>> v;
+        v.reserve(n + m);
+
+        for (auto x : a)
+            v.push_back({x, 1}); // A
+        for (auto x : b)
+            v.push_back({x, -1}); // B
+
+        sort(v.begin(), v.end());
+
+        bool ok = true;
+
+        int bal = 0;
+        for (size_t i = 0; i < v.size(); i++)
+        {
+            bal += v[i].second;
+            if (bal < 0)
+            {
+                ok = false;
+                break;
+            }
+        }
+
+        if (ok)
+        {
+            bal = 0;
+            for (int i = (int)v.size() - 1; i >= 0; i--)
+            {
+                bal += v[i].second;
+                if (bal < 0)
+                {
+                    ok = false;
+                    break;
+                }
+            }
+        }
+
+        cout << (ok ? "YES" : "NO") << '\n';
     }
 
     return 0;
