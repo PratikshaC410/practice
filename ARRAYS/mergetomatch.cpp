@@ -31,21 +31,29 @@ void solve()
     }
 
     int ptr = 0;
-    bool ok = true;
+    bool possible = true;
+
     for (int i = 0; i < m; ++i)
     {
+        if (ptr >= n || a[ptr] >= b[i])
+        {
+            possible = false;
+            break;
+        }
+
         while (ptr < n && a[ptr] < b[i])
         {
             ptr++;
         }
-        if (ptr == 0 || ptr == n)
+
+        if (ptr >= n)
         {
-            ok = false;
+            possible = false;
             break;
         }
     }
 
-    if (ok)
+    if (possible)
     {
         cout << "YES\n";
     }
