@@ -1,61 +1,53 @@
-#include <iostream>
-#include <string>
-#include <vector>
-
+#include <bits/stdc++.h>
 using namespace std;
-
-void solve()
-{
-    int n, k;
-    cin >> n >> k;
-    string s;
-    cin >> s;
-
-    int a = 0;
-    int b = 0;
-    int c = 0;
-
-    for (char ch : s)
-    {
-        if (ch == '0')
-            a++;
-        else if (ch == '1')
-            b++;
-        else if (ch == '2')
-            c++;
-    }
-
-    string ans(n, ' ');
-    for (int i = 1; i <= n; ++i)
-    {
-        if (i <= a || i > n - b)
-        {
-            ans[i - 1] = '-';
-        }
-        else if (i > a + c && i <= n - b - c)
-        {
-            ans[i - 1] = '+';
-        }
-        else
-        {
-            ans[i - 1] = '?';
-        }
-    }
-
-    cout << ans << "\n";
-}
 
 int main()
 {
 
-    int t;
-    if (cin >> t)
-    {
-        while (t--)
-        {
-            solve();
-        }
-    }
+    int T;
+    cin >> T;
 
-    return 0;
+    while (T--)
+    {
+        int n, k;
+        cin >> n >> k;
+
+        string s;
+        cin >> s;
+
+        int z = 0, o = 0, t = 0;
+
+        for (char c : s)
+        {
+            if (c == '0')
+                z++;
+            else if (c == '1')
+                o++;
+            else
+                t++;
+        }
+
+        string ans;
+
+        for (int i = 1; i <= n; i++)
+        {
+            int low = max(z, k - (n - i));
+            int high = min(z + t, i - 1);
+
+            if (low > high)
+            {
+                ans += '-';
+            }
+            else if (i > z + t && i <= n - (k - z))
+            {
+                ans += '+';
+            }
+            else
+            {
+                ans += '?';
+            }
+        }
+
+        cout << ans << '\n';
+    }
 }
