@@ -10,44 +10,34 @@ void solve()
     string s;
     cin >> s;
 
-    if (n == 1)
+    int ones = 0;
+    int zero_blocks = 0;
+    bool in_zero_block = false;
+
+    for (char c : s)
     {
-        if (s[0] == '1')
+        if (c == '1')
         {
-            cout << "YES\n";
+            ones++;
+            in_zero_block = false;
         }
         else
         {
-            cout << "NO\n";
-        }
-        return;
-    }
-
-    bool possible = false;
-    for (int i = 0; i < n; i++)
-    {
-        if (s[i] == '1')
-        {
-            if (i + 1 < n && s[i + 1] == '1')
+            if (!in_zero_block)
             {
-                possible = true;
-                break;
-            }
-            if (i + 2 < n && s[i + 2] == '1')
-            {
-                possible = true;
-                break;
+                zero_blocks++;
+                in_zero_block = true;
             }
         }
     }
 
-    if (possible)
+    if (ones > zero_blocks)
     {
-        cout << "YES\n";
+        cout << "Yes\n";
     }
     else
     {
-        cout << "NO\n";
+        cout << "No\n";
     }
 }
 
