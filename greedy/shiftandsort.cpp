@@ -9,31 +9,17 @@ void solve()
     cin >> s;
 
     long long total_cost = 0;
-    long long ones_count = 0;
-    int n = s.length();
+    long long ones = 0;
 
-    for (int i = 0; i < n;)
+    for (char c : s)
     {
-        if (s[i] == '1')
+        if (c == '1')
         {
-            ones_count++;
-            i++;
+            ones++;
         }
-        else
+        else if (ones > 0)
         {
-            int j = i;
-            while (j < n && s[j] == '0')
-            {
-                j++;
-            }
-            long long zero_block_len = j - i;
-
-            if (ones_count > 0)
-            {
-                total_cost += (ones_count + 1) + (zero_block_len - 1);
-            }
-
-            i = j;
+            total_cost += (ones + 1);
         }
     }
 
