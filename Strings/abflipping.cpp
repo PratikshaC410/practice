@@ -10,42 +10,29 @@ void solve()
     string s;
     cin >> s;
 
-    long long total_ops = 0;
-    int i = 0;
+    long long ans = 0;
+    long long count_a = 0;
 
-    while (i < n)
+    for (int i = 0; i < n; i++)
     {
-        while (i < n && s[i] == 'B')
+        if (s[i] == 'A')
         {
-            i++;
+            count_a++;
         }
-        if (i >= n)
-            break;
-
-        long long a_count = 0;
-        int j = i;
-
-        while (j < n)
+        else
         {
-            if (s[j] == 'A')
+            if (count_a > 0)
             {
-                a_count++;
-                j++;
-            }
-            else
-            {
-                total_ops += a_count;
-                j++;
-                if (j < n && s[j] == 'B')
+                ans += count_a;
+                if (i + 1 < n && s[i + 1] == 'B')
                 {
-                    break;
+                    count_a = 0;
                 }
             }
         }
-        i = j;
     }
 
-    cout << total_ops << "\n";
+    cout << ans << "\n";
 }
 
 int main()
