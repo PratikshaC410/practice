@@ -1,17 +1,9 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+#include <iostream>
+using namespace std;
 class Solution
 {
     unordered_map<int, int> count;
+    vector<int> result;
     int maxFreq = 0;
 
     int computeSubtreeSum(TreeNode *root)
@@ -19,12 +11,20 @@ class Solution
         if (!root)
             return 0;
 
-        int left = computeSubtreeSum(root->left);
-        int right = computeSubtreeSum(root->right);
-        int sum = root->val + left + right;
+        int sum = root->val + computeSubtreeSum(root->left) + computeSubtreeSum(root->right);
 
-        count[sum]++;
-        maxFreq = max(maxFreq, count[sum]);
+        int currentFreq = ++count[sum];
+
+        if (currentFreq > maxFreq)
+        {
+            maxFreq = currentFreq;
+            result.clear();
+            result.push_back(sum);
+        }
+        else if (currentFreq == maxFreq)
+        {
+            result.push_back(sum);
+        }
 
         return sum;
     }
@@ -33,15 +33,6 @@ public:
     vector<int> findFrequentTreeSum(TreeNode *root)
     {
         computeSubtreeSum(root);
-
-        vector<int> result;
-        for (const auto &[sum, freq] : count)
-        {
-            if (freq == maxFreq)
-            {
-                result.push_back(sum);
-            }
-        }
         return result;
     }
 };
