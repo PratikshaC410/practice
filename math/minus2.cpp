@@ -11,21 +11,30 @@ int main()
         int n;
         cin >> n;
 
-        int even = 0;
         int odd = 0;
+        int even0 = 0;
+        int even2 = 0;
 
         for (int i = 0; i < n; i++)
         {
             int x;
             cin >> x;
 
-            if (x % 2 == 0)
-                even++;
-            else
+            if (x % 2 != 0)
+            {
                 odd++;
+            }
+            else if (x % 4 == 0)
+            {
+                even0++;
+            }
+            else
+            {
+                even2++;
+            }
         }
 
-        cout << max(even, odd) << endl;
+        cout << max({odd, even0, even2}) << endl;
     }
 
     return 0;
