@@ -14,10 +14,13 @@ void solve()
         cin >> a[i];
     }
 
-    sort(a.begin(), a.end());
+    long long max_prefix = 0;
+    for (int i = 0; i < n - 1; i++)
+    {
+        max_prefix = max(max_prefix, a[i]);
+    }
 
-    long long ans = a[n - 1] + a[n - 2];
-    cout << ans << "\n";
+    cout << max_prefix + a[n - 1] << "\n";
 }
 
 int main()
