@@ -13,7 +13,7 @@ class Solution
 public:
     vector<vector<int>> findVertical(Node *root)
     {
-        map<int, map<int, multiset<int>>> nodes;
+        map<int, map<int, multiset<int>>> nodes; // vertical,level,multiset for multiple same value nodes
         queue<pair<Node *, pair<int, int>>> todo;
         todo.push({root, {0, 0}});
         while (!todo.empty())

@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
@@ -9,7 +8,7 @@ void solve()
     int n, m;
     cin >> n >> m;
 
-    vector<int> freq(2 * m + 2, 0);
+    vector<int> freq(m + 2, 0);
     for (int i = 0; i < n; ++i)
     {
         int a;

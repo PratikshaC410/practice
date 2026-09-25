@@ -8,10 +8,10 @@ int main()
     cin >> s;
 
     set<char> res;
-
+    char str = s[0];
     for (char ch : s)
     {
-        res.insert(ch);
+        if ()
     }
 
     if (res.size() % 2 == 0)
