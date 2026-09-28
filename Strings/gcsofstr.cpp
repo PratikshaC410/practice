@@ -1,10 +1,9 @@
-#include <string>
-#include <numeric>
+#include <iostream>
 
 class Solution
 {
 public:
-    string gcdOfStrings(std::string str1, std::string str2)
+    string gcdOfStrings(string str1, string str2)
     {
         if (str1 + str2 != str2 + str1)
         {
