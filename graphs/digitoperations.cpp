@@ -1,35 +1,26 @@
 #include <iostream>
-
 class Solution
 {
 public:
-    vector<int> primes;
+    vector<bool> primes = vector<bool>(10000, true);
+    bool check = false;
 
-    bool isPrime(int x)
+    void isPrime()
     {
-        for (int p : primes)
-            if (p == x)
-                return true;
-        return false;
+        primes[0] = primes[1] = false;
+        for (int i = 2; i * i < 10000; i++)
+            if (primes[i])
+                for (int j = i * i; j < 10000; j += i)
+                    primes[j] = false;
+        check = true;
     }
 
     int minOperations(int n, int m)
     {
-        primes.clear();
-        for (int x = 2; x < 10000; x++)
-        {
-            bool ok = true;
-            for (int i = 2; i * i <= x; i++)
-                if (x % i == 0)
-                {
-                    ok = false;
-                    break;
-                }
-            if (ok)
-                primes.push_back(x);
-        }
+        if (!check)
+            isPrime();
 
-        if (isPrime(n) || isPrime(m))
+        if (primes[n] || primes[m])
             return -1;
 
         vector<int> dist(10000, INT_MAX);
@@ -58,7 +49,7 @@ public:
                     int next = stoi(s);
                     s[i] = old;
 
-                    if (isPrime(next))
+                    if (primes[next])
                         continue;
                     if (dist[cur] + next < dist[next])
                     {
