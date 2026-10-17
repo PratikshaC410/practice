@@ -25,7 +25,7 @@ int main()
 
     double time = (dist * k) / 50.0;
 
-    cout << time << endl;
+    printf("%.10f\n", time);
 
     return 0;
 }
