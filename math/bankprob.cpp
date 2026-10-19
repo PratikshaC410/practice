@@ -12,7 +12,7 @@ int main()
         long long n, k;
         cin >> n >> k;
 
-        cout << ((1LL << (n + 1)) - (1LL << (n - k + 1))) << '\n';
+        cout << ((1LL << (k + 1)) - 2) << '\n';
     }
 
     return 0;
