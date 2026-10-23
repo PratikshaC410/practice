@@ -1,5 +1,5 @@
 
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
 int main()
@@ -15,7 +15,7 @@ int main()
         if (a <= b)
             cout << -1 << endl;
         else
-            cout << min(a / 2, b) << endl;
+            cout << min(a - b, b) << endl;
     }
 
     return 0;
