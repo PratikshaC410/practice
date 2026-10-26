@@ -42,19 +42,19 @@ int main()
         for (int i = 0; i < n; i++)
             cin >> a[i];
 
-        long long lo = 1, hi = 1000000000;
+        long long low = 1, high = 1000000000;
 
-        while (lo < hi)
+        while (low < high)
         {
-            long long mid = (lo + hi) / 2;
+            long long mid = (low + high) / 2;
 
             if (check(mid))
-                hi = mid;
+                high = mid;
             else
-                lo = mid + 1;
+                low = mid + 1;
         }
 
-        cout << lo << '\n';
+        cout << low << '\n';
     }
 
     return 0;
