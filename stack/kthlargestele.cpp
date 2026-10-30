@@ -4,34 +4,19 @@ public:
     int kthLargestElement(vector<int> &nums, int k)
     {
 
-        stack<int> st;
+        priority_queue<int, vector<int>, greater<int>> pq;
 
         for (int i = 0; i < nums.size(); i++)
         {
 
-            while (!st.empty() && st.top() < nums[i])
+            pq.push(nums[i]);
+
+            if (pq.size() > k)
             {
-                int temp = st.top();
-                st.pop();
-
-                if (st.empty() || st.top() >= nums[i])
-                {
-                    st.push(nums[i]);
-                    nums[i] = temp;
-                }
+                pq.pop();
             }
-
-            st.push(nums[i]);
         }
 
-        int cnt = 1;
-
-        while (cnt < k)
-        {
-            st.pop();
-            cnt++;
-        }
-
-        return st.top();
+        return pq.top();
     }
 };
