@@ -9,26 +9,23 @@ int main() {
         int n;
         cin >> n;
 
-        vector<int> a(n);
-        int freq[101] = {0};
+        int cnt[101] = {0};
 
         for (int i = 0; i < n; i++) {
-            cin >> a[i];
-            freq[a[i]]++;
+            int x;
+            cin >> x;
+            cnt[x]++;
         }
 
-        sort(a.begin(), a.end(), [&](int x, int y) {
-            if (freq[x] == freq[y])
-                return x > y;
-
-            return freq[x] > freq[y];
-        });
-
-        for (int i = 0; i < n; i++) {
-            cout << a[i] << " ";
+        for (int i = 1; i <= n; i++) {
+            for (int j = 100; j >= 1; j--) {
+                if (cnt[j] >= i) {
+                    cout << j << " ";
+                }
+            }
         }
 
-        cout << endl;
+        cout << "\n";
     }
 
     return 0;
