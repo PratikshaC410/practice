@@ -1,3 +1,4 @@
+#include <iostream>
 class Solution
 {
     int cnt_str(string s)
