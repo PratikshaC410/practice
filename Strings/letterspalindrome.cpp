@@ -14,28 +14,30 @@ int main()
         string s;
         cin >> s;
 
-        int i = 0, j = n - 1;
         int cnt = 0;
 
-        while (i < j)
+        for (int i = 0; i < n / 2; i++)
         {
-            if (s[i] == s[j])
+            while (s[i] != s[n - i - 1])
             {
-                i++;
-                j--;
-            }
-            else
-            {
-                char c = max(s[i], s[j]);
-
-                for (int k = 0; k < n; k++)
+                if (s[i] > s[n - i - 1])
                 {
-                    if (s[k] == c)
+                    char c = s[i];
+                    for (int j = 0; j < n; j++)
                     {
-                        s[k]--;
+                        if (s[j] == c)
+                            s[j]--;
                     }
                 }
-
+                else
+                {
+                    char c = s[n - i - 1];
+                    for (int j = 0; j < n; j++)
+                    {
+                        if (s[j] == c)
+                            s[j]--;
+                    }
+                }
                 cnt++;
             }
         }
