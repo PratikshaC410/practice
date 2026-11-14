@@ -21,6 +21,7 @@ int main()
         sort(a.begin(), a.end());
 
         vector<int> ans;
+        vector<int> rem;
 
         for (int i = 0; i < n; i++)
         {
@@ -28,22 +29,17 @@ int main()
             {
                 ans.push_back(a[i]);
             }
-        }
-
-        int mx = a[n - 1];
-
-        int cnt = 0;
-        for (int i = 0; i < n; i++)
-        {
-            if (a[i] == mx)
+            else
             {
-                cnt++;
+                rem.push_back(a[i]);
             }
         }
 
-        if (cnt > 1)
+        reverse(rem.begin(), rem.end());
+
+        for (int x : rem)
         {
-            ans.push_back(mx);
+            ans.push_back(x);
         }
 
         cout << ans.size() << "\n";
