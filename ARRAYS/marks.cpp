@@ -7,14 +7,11 @@ int main()
     int n, m;
     cin >> n >> m;
 
-    vector<vector<int>> students(n, vector<int>(m));
+    vector<string> students(n);
 
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < m; j++)
-        {
-            cin >> students[i][j];
-        }
+        cin >> students[i];
     }
 
     vector<bool> visited(n, false);
@@ -22,8 +19,7 @@ int main()
 
     for (int i = 0; i < m; i++)
     {
-
-        int col_max = 0;
+        char col_max = '0';
 
         for (int j = 0; j < n; j++)
         {
