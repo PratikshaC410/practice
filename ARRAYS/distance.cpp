@@ -8,29 +8,10 @@ int main()
 
     while (t--)
     {
-        int R, x0, y0;
-        cin >> R >> x0 >> y0;
+        int x0, y0, R;
+        cin >> x0 >> y0 >> R;
 
-        int d = 0;
-        bool found = false;
-
-        for (int i = 0; i <= x0 + R && !found; i++)
-        {
-            for (int j = 0; j <= y0 + R; j++)
-            {
-                d = (x0 - i) * (x0 - i) + (y0 - j) * (y0 - j);
-
-                if (d == R * R)
-                {
-                    cout << i << " " << j << endl;
-                    found = true;
-                    break;
-                }
-            }
-        }
-
-        if (!found)
-            cout << "No point found" << endl;
+        cout << x0 + R << " " << y0 << endl;
     }
 
     return 0;
