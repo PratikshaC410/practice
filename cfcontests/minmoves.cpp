@@ -24,7 +24,7 @@ int main()
             }
             ans = min(ans, moves);
         }
-        cout << ans;
+        cout << ans << "\n";
     }
     return 0;
 }
