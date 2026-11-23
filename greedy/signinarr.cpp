@@ -12,14 +12,10 @@ int main()
         int a, b;
         cin >> a >> b;
 
-        if (a % 2 == 0 && (a + b) % 2 == 0 && a + b > 1)
-        {
-            cout << "Yes" << endl;
-        }
+        if (a % 2 == 0 && (a > 0 || b % 2 == 0))
+            cout << "Yes\n";
         else
-        {
-            cout << "No" << endl;
-        }
+            cout << "No\n";
     }
 
     return 0;
