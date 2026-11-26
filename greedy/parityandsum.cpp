@@ -12,41 +12,46 @@ int main()
         int n;
         cin >> n;
 
-        vector<long long> a(n);
+        vector<long long> even;
 
-        long long maxOdd = 0, maxEven = 0;
-        int cnt = 0;
+        long long maxOdd = 0;
 
         for (int i = 0; i < n; i++)
         {
-            cin >> a[i];
+            long long x;
+            cin >> x;
 
-            if (a[i] % 2 == 0)
+            if (x % 2 == 0)
             {
-                maxEven = max(maxEven, a[i]);
-                cnt++;
+                even.push_back(x);
             }
             else
             {
-                maxOdd = max(maxOdd, a[i]);
+                maxOdd = max(maxOdd, x);
             }
         }
 
-        if (cnt == 0 || cnt == n)
+        if (even.empty() || maxOdd == 0)
         {
             cout << 0 << '\n';
             continue;
         }
 
+        sort(even.begin(), even.end());
+
         int ans = 0;
 
-        while (maxOdd < maxEven)
+        for (long long x : even)
         {
-            maxOdd += maxEven;
+
+            if (x > maxOdd)
+            {
+                ans++;
+            }
+
+            maxOdd += x;
             ans++;
         }
-
-        ans += cnt;
 
         cout << ans << '\n';
     }
