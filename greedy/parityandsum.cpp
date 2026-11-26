@@ -1,60 +1,46 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 
 int main()
 {
+
     int t;
     cin >> t;
-
     while (t--)
     {
         int n;
         cin >> n;
-
-        vector<long long> even;
-
-        long long maxOdd = 0;
-
+        long long mx_odd = -1;
+        vector<long long> ev;
         for (int i = 0; i < n; i++)
         {
             long long x;
             cin >> x;
-
-            if (x % 2 == 0)
-            {
-                even.push_back(x);
-            }
+            if (x & 1)
+                mx_odd = max(mx_odd, x);
             else
-            {
-                maxOdd = max(maxOdd, x);
-            }
+                ev.push_back(x);
         }
 
-        if (even.empty() || maxOdd == 0)
+        if (mx_odd == -1 || ev.empty())
         {
-            cout << 0 << '\n';
+            cout << 0 << "\n";
             continue;
         }
 
-        sort(even.begin(), even.end());
-
-        int ans = 0;
-
-        for (long long x : even)
+        sort(ev.begin(), ev.end());
+        int ans = ev.size();
+        for (long long e : ev)
         {
-
-            if (x > maxOdd)
+            if (e < mx_odd)
+                mx_odd += e;
+            else
             {
                 ans++;
+                break;
             }
-
-            maxOdd += x;
-            ans++;
         }
-
-        cout << ans << '\n';
+        cout << ans << "\n";
     }
-
     return 0;
 }
